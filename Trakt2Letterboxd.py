@@ -15,7 +15,12 @@ class TraktImporter(object):
         self.api_clid = 'b04da548cc9df60510eac7ec1845ab98cebd8008a9978804a981bff7e73ab270'
         self.api_clsc = 'a880315fba01a5e5f0ad7de12b7872e36826a9359b2f419122a24dee1b2cb600'
         self.api_token = None
-        self.api_headers = { 'Content-Type': 'application/json' }
+        self.api_headers = { 
+            'Content-Type': 'application/json',
+            'trakt-api-version': '2',
+            'trakt-api-key': self.api_clid,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
 
 
     def authenticate(self):
@@ -123,7 +128,8 @@ class TraktImporter(object):
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + self.api_token,
             'trakt-api-version': '2',
-            'trakt-api-key': self.api_clid
+            'trakt-api-key': self.api_clid,
+            'User-Agent': 'Mozilla/5.0' 
         }
 
         extracted_movies = []
@@ -159,7 +165,8 @@ class TraktImporter(object):
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + self.api_token,
             'trakt-api-version': '2',
-            'trakt-api-key': self.api_clid
+            'trakt-api-key': self.api_clid,
+            'User-Agent': 'Mozilla/5.0'
         }
 
         request = Request(self.api_root + '/sync/ratings/movies', headers=headers)
